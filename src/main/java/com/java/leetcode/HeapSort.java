@@ -8,24 +8,24 @@ public class HeapSort {
     public HeapSort(int size) {
         data = new int[size + 1];
         for(int i = 0; i < data.length; i++) {
-            data[i] = 0;
+            data[i] = -1;
         }
         counter = 1;
     }
 
     public void add(int value) {
         data[counter] = value;
-        bubbleTop(value);
         counter++;
+        bubbleTop();
     }
 
-    private void bubbleTop(int value) {
-        int n = counter;
-        while(n > 1) {
-            if(value < data[n / 2])
-                return;
-            swap(data, n, n / 2);
-            n = n / 2;
+    private void bubbleTop() {
+        int val = data[counter-1];
+        int index = counter-1;
+
+        while( index/2 > 0 && data[index/2] < val){
+            swap(data, index, index/2);
+            index = index/2;
         }
     }
 
@@ -36,25 +36,22 @@ public class HeapSort {
     }
 
     public int getMax() {
-        int max = this.data[1];
-        swap(data, 1, counter - 1);
-        data[counter - 1] = -1;
+        int element = data[1];
+        data[1] = data[counter-1];
         counter--;
-        bubbleDown(data[1]);
-        return max;
+        bubbleDown();
+        return element;
     }
 
-    private void bubbleDown(int value) {
-        int rot = 1;
-        while(rot * 2 < counter) {
-            if(data[rot * 2] > value) {
-                swap(data, rot, rot * 2);
-                rot = rot * 2;
-            } else if((rot * 2 + 1) < counter && data[rot * 2 + 1] > value) {
-                swap(data, rot, rot * 2 + 1);
-                rot = rot * 2;
-            } else
-                break;
+    private void bubbleDown() {
+        int value = data[1];
+        int index = 1;
+        while(index*2 < counter){
+            int smallIndex = index*2;
+            if( smallIndex +1  < counter && data[smallIndex] < data[smallIndex+1] ) smallIndex = smallIndex +1;
+            if( data[smallIndex] < value) return;
+            swap(data, index, smallIndex);
+            index = smallIndex;
         }
     }
 
