@@ -24,4 +24,16 @@ public class KnapSack{
         return v[items.length][capacity];
     }
 
+    public int sack(int i, int W, int[] items, int[] weights){
+
+        if( i== 0  || W == 0){
+            return 0;
+        }
+
+        if( weights[i-1] > W){
+            return sack(i-1, W, items, weights);
+        }
+
+        return Math.max(sack(i-1, W, items, weights), items[i-1] + sack(i-1, W - weights[i-1], items, weights));
+    }
 }
