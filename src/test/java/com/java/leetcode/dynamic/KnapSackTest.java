@@ -22,4 +22,11 @@ public class KnapSackTest{
         assertEquals(sack.sack(val, wt, W), 220);
         assertEquals(sack.sack(val.length, W, val, wt), 220);
     }
+
+    @Test
+    public void currencyExchange(){
+        int[] items = {1, 2, 3};
+        int sum = 4;
+        System.out.println(this.sack.currencyExchange(items, 2, sum));
+    }
 }
