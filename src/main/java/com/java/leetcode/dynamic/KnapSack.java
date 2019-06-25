@@ -37,16 +37,31 @@ public class KnapSack{
         return Math.max(sack(i-1, W, items, weights), items[i-1] + sack(i-1, W - weights[i-1], items, weights));
     }
 
-    public int currencyExchange(int[] items, int num, int sum){
+    public int min = Integer.MAX_VALUE;
+    public int minn = 0;
 
-        if( sum == 0)
+    public int currencyExchange(int[] items, int num, int sum, int count){
+
+        if( sum == 0){
+            if( min > count ){
+                min = count;
+                minn = 1;
+            }else if( min == count){
+                minn++;
+            }
             return 1;
+        }
 
         if( sum < 0 )
             return 0;
 
         if( num < 0  )
             return 0;
-        return currencyExchange(items, num - 1, sum) + currencyExchange(items, num, sum - items[num]);
+
+        return currencyExchange(items, num - 1, sum, count) + currencyExchange(items, num, sum - items[num], ++count);
+    }
+
+    public int getMin(){
+        return minn;
     }
 }
