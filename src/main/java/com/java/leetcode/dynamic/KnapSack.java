@@ -64,4 +64,24 @@ public class KnapSack{
     public int getMin(){
         return minn;
     }
+
+
+    public int maxPrice = -1;
+    public void rod_cutting(int lengths[], int price[], int index, int rodLength, int mprice){
+
+        if( rodLength < 0 || index < 0)
+            return ;
+
+        if( rodLength == 0 ){
+            if(mprice > maxPrice)
+                maxPrice = mprice;
+        }
+        if( rodLength < lengths[index] )
+            rod_cutting(lengths, price, --index, rodLength, mprice );
+        else
+            rod_cutting(lengths, price, index, rodLength - lengths[index], mprice + price[index]);
+
+        rod_cutting(lengths, price, --index, rodLength, mprice);
+    }
 }
+
