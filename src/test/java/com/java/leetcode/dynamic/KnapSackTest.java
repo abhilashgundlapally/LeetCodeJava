@@ -30,4 +30,20 @@ public class KnapSackTest{
         System.out.println(this.sack.currencyExchange(items, items.length-1, sum, 0));
         System.out.println(this.sack.minn);
     }
+
+    @Test
+    public void rodCutting(){
+        int[] items = {1, 2, 3, 4, 5, 6, 7, 8};
+        int[] values = {1, 5, 8, 9, 10, 17, 17, 20};
+
+        this.sack.rod_cutting(items, values, items.length-1, 8, 0);
+        assertEquals(this.sack.maxPrice, 22);
+        this.sack.maxPrice = -1;
+        this.sack.rod_cutting(items, values, items.length-1, 4, 0);
+        assertEquals(this.sack.maxPrice, 10);
+
+        this.sack.maxPrice = -1;
+        this.sack.rod_cutting(items, values, items.length-1, 5, 0);
+        assertEquals(this.sack.maxPrice, 13);
+    }
 }
