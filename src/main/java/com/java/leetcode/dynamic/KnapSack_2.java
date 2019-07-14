@@ -73,4 +73,27 @@ public class KnapSack_2 {
 
         return dp[profits.length -1][capacity];
     }
+
+    public int knapSackBottomUpAdv(int[] weights, int[] profits, int capacity) {
+        int[] dp = new int[capacity+1];
+
+        for(int c = 0; c <= capacity; c++) {
+            if(weights[0] <= c)
+                dp[c] = profits[0];
+        }
+
+        for(int i = 1; i < profits.length; i++) {
+            for(int c = 1; c <= capacity; c++) {
+                int pro1 = 0;
+
+                if(c >= weights[i])
+                    pro1 = profits[i] + dp[c-weights[i]];
+
+                int pro2 = dp[c];
+
+                dp[c] = Math.max(pro1, pro2);
+            }
+        }
+        return dp[capacity];
+    }
 }

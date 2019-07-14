@@ -19,8 +19,9 @@ public class KnapSack_2Test {
         int[] profits = {1, 6, 10, 16};
         int[] weights = {1, 2, 3, 5};
         int prof = sack2.knapSack( weights, profits, 7);
-        int dpProfits = sack2.knapSackDp(weights, profits, 7);
-        int dpProfitsBUp = sack2.knapSackBottomUp(weights, profits, 7);
+        //int dpProfits = sack2.knapSackDp(weights, profits, 7);
+        //int dpProfitsBUp = sack2.knapSackBottomUp(weights, profits, 7);
+        int dpProfitsBUp = sack2.knapSackBottomUpAdv(weights, profits, 7);
         assertEquals(prof, dpProfitsBUp);
     }
 
